@@ -77,7 +77,7 @@ ros2 launch test_urdf_tool launch.py
 ~~~
 
 Don't forget to change the rviz configuration
-![rviz](./img/rviz.png)
+![rviz](https://github.com/xiaoming-sun6/sw2urdf_ros2/blob/master/img/rviz.png)
 
 ### 5. Reference
 Thanks for the links
