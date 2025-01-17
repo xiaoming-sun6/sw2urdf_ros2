@@ -26,14 +26,17 @@ def generate_launch_description():
         'rviz_config_file',
         default_value=os.path.join(bringup_dir, 'rviz', 'view.rviz'),
         description='Full path to the RVIZ config file to use')  
+    
     declare_use_robot_state_pub_cmd = DeclareLaunchArgument(
         'use_robot_state_pub',
         default_value='True',
         description='Whether to start the robot state publisher')
+    
     declare_use_joint_state_pub_cmd = DeclareLaunchArgument(
         'use_joint_state_pub',
         default_value='True',
         description='Whether to start the joint state publisher')
+    
     declare_use_rviz_cmd = DeclareLaunchArgument(
         'use_rviz',
         default_value='True',
@@ -70,7 +73,11 @@ def generate_launch_description():
         arguments=['-d', rviz_config_file],
         output='screen')
         
-  
+    tf_map= Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        arguments= ["0", "0", "0", "0", "0", "0", "map", "odom"])
+    
     # Create the launch description and populate
     ld = LaunchDescription()
 
@@ -86,6 +93,7 @@ def generate_launch_description():
     ld.add_action(start_joint_state_publisher_cmd)
     ld.add_action(start_robot_state_publisher_cmd)
     ld.add_action(rviz_cmd)
+    ld.add_action(tf_map)
 
     return ld   
     
